@@ -1,0 +1,156 @@
+/* RESET */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* :root {
+	--clr-accent: ;
+    --clr-text: ;
+} */
+
+body {
+	margin: 0;
+	font-family: 'Noto Sans JP', sans-serif;
+	line-height: 1.6;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+h1,
+h2,
+h3,
+p {
+	margin: 0;
+}
+
+/* REUSABLE CLASS */
+.container {
+	width: 85%;
+	max-width: 65em; /* 65em * 16 = 1,040px */
+	margin: 0 auto;
+}
+
+section {
+	padding: 7em 0;
+}
+
+.split {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	& > * {
+		flex-basis: 30%;
+		min-width: 15em;
+	}
+}
+
+/* spacing will not do anything but the direct children in it will */
+.spacing > * + * {
+	margin-top: var(--spacer, 2rem);
+}
+
+.btn {
+	display: inline-block;
+	text-decoration: none;
+	color: var(--clr-text, white);
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 1.125rem;
+	padding: 0.5em 1.25em;
+	background: var(--clr-accent, blue);
+	border-radius: 0.25em;
+	transition: transform 250ms ease-in-out, opacity 250ms linear;
+}
+
+.btn:hover,
+.btn:focus {
+	transform: scale(1.1);
+	opacity: 0.9;
+}
+
+.primary-title {
+	font-size: 4rem;
+	font-size: clamp(3rem, calc(5vw + 1rem), 4.5rem);
+	line-height: 1;
+	transform: uppercase;
+}
+
+.section-title {
+	text-align: center;
+	font-size: clamp(2.5rem, calc(5vw + 1rem), 4rem);
+	line-height: 1;
+	color: #17353d;
+	margin-bottom: 5rem;
+}
+
+.hero {
+	color: white;
+	text-align: center;
+	padding: 15em 0;
+	background: #222;
+
+	@supports (background-blend-mode: multiply) {
+		background: url(../img/shoe-3.png), radial-gradient(#444, #111);
+		background-blend-mode: multiply;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+
+	//background-size: 10%;
+}
+
+.featured {
+	background: #eee;
+
+	&__item {
+		display: block;
+		position: relative;
+		transform: scale(0.85);
+		transition: transform 250ms ease-in-out;
+		text-decoration: none;
+		color: #333;
+		text-align: center;
+		line-height: 1.3;
+
+		&:hover,
+		&:focus {
+			transform: scale(1);
+
+			.featured__details {
+				opacity: 1;
+				text-shadow: 0 0 1em rgba(#fff, 1);
+			}
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 10%;
+			left: 10%;
+			// if you do padding 100% it's based on the width not on the height.
+			padding: 75% 75% 0 0;
+			border-radius: 50%;
+			background: #2193b0;
+			z-index: -1;
+		}
+	}
+
+	&__details {
+		opacity: 0;
+		transition: opacity 250ms linear;
+
+		span {
+			display: block;
+			font-weight: 700;
+			font-size: 2.5rem;
+		}
+	}
+}
